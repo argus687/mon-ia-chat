@@ -1,0 +1,330 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #212121;
+    color: #ececec;
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 260px;
+    background-color: #171717;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-right: 1px solid #2f2f2f;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.wave {
+    color: #10a37f;
+    font-size: 1.3rem;
+}
+
+#newChatButton {
+    background: transparent;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    transition: background 0.2s;
+}
+
+#newChatButton:hover {
+    background: #2a2a2a;
+}
+
+.section-title {
+    font-size: 0.75rem;
+    color: #8e8ea0;
+    margin-bottom: 8px;
+    padding-left: 4px;
+    text-transform: uppercase;
+}
+
+#chatList {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-top: 1px solid #2f2f2f;
+    padding-top: 10px;
+}
+
+.sidebar-bottom button {
+    background: transparent;
+    border: none;
+    color: #ececec;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.sidebar-bottom button:hover {
+    background: #2a2a2a;
+}
+
+/* Main Chat Area */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #212121;
+    position: relative;
+}
+
+header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid #2f2f2f;
+    font-size: 0.95rem;
+}
+
+#mobileMenuButton {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#welcome {
+    margin: auto;
+    text-align: center;
+    max-width: 450px;
+}
+
+.big-wave {
+    font-size: 3rem;
+    color: #10a37f;
+    margin-bottom: 15px;
+}
+
+#welcome h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+#welcome p {
+    color: #8e8ea0;
+    font-size: 0.95rem;
+}
+
+/* Composer / Input Bar */
+.composer-container {
+    padding: 16px;
+    background: linear-gradient(180deg, rgba(33,33,33,0) 0%, rgba(33,33,33,1) 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.composer {
+    width: 100%;
+    max-width: 768px;
+    background-color: #2f2f2f;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    border: 1px solid #424242;
+}
+
+#messageInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.95rem;
+    resize: none;
+    max-height: 150px;
+    outline: none;
+    padding-top: 6px;
+}
+
+.composer button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.composer button.send {
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.composer-container small {
+    font-size: 0.75rem;
+    color: #8e8ea0;
+    margin-top: 8px;
+}
+
+/* Modals & Overlays */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.card {
+    background-color: #212121;
+    border: 1px solid #333;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+}
+
+.card input, .card select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    background: #171717;
+    border: 1px solid #444;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.card button.primary {
+    background-color: #10a37f;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card button.link {
+    background: none;
+    border: none;
+    color: #10a37f;
+    cursor: pointer;
+    display: inline;
+    padding: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.settings-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#closeSettingsButton {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Widgets et Cartes embed */
+.map-embed {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    margin-top: 10px;
+}
+
+.weather-card {
+    background: #2d2d2d;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+    border-left: 4px solid #10a37f;
+}
+
+.message-bubble {
+    padding: 10px 14px;
+    border-radius: 8px;
+    max-width: 80%;
+    line-height: 1.4;
+    word-break: break-word;
+}
+.message-user {
+    background-color: #2f2f2f;
+    align-self: flex-end;
+}
+.message-ai {
+    background-color: transparent;
+    align-self: flex-start;
+}
