@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>ARGUS AI</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
 </head>
+
 <body>
 
     <div id="app">
+
         <aside id="sidebar">
+
             <div class="logo">
                 <span class="wave">〰</span>
                 <strong>ARGUS</strong>
@@ -26,128 +41,292 @@
             <div id="chatList"></div>
 
             <div class="sidebar-bottom">
+
                 <button id="settingsButton">
                     ⚙️ Paramètres
                 </button>
+
                 <button id="logoutButton">
                     ⇥ Déconnexion
                 </button>
+
             </div>
+
         </aside>
 
+
         <main>
+
             <header>
-                <button id="mobileMenuButton">☰</button>
-                <span id="currentChatTitle">ARGUS</span>
+
+                <button
+                    id="mobileMenuButton"
+                >
+                    ☰
+                </button>
+
+                <span id="currentChatTitle">
+                    ARGUS
+                </span>
+
                 <span id="userNameDisplay"></span>
+
             </header>
 
+
             <div id="messages">
+
                 <div id="welcome">
-                    <div class="big-wave">〰</div>
-                    <h1>Bonjour, je suis ARGUS.</h1>
-                    <p>Que puis-je faire pour vous ? Pensez à configurer votre clé API dans les paramètres si ce n'est pas fait.</p>
+
+                    <div class="big-wave">
+                        〰
+                    </div>
+
+                    <h1>
+                        Bonjour, je suis ARGUS.
+                    </h1>
+
+                    <p>
+                        Que puis-je faire pour vous ?
+                    </p>
+
                 </div>
+
             </div>
+
 
             <div class="composer-container">
+
                 <div class="composer">
-                    <textarea id="messageInput" placeholder="Écrivez un message..."></textarea>
-                    <button id="voiceButton" class="voice">🎙️</button>
-                    <button id="sendButton" class="send">↑</button>
+
+                    <textarea
+                        id="messageInput"
+                        placeholder="Écrivez un message..."
+                    ></textarea>
+
+                    <button
+                        id="voiceButton"
+                        class="voice"
+                    >
+                        🎙️
+                    </button>
+
+                    <button
+                        id="sendButton"
+                        class="send"
+                    >
+                        ↑
+                    </button>
+
                 </div>
-                <small>ARGUS peut faire des erreurs.</small>
+
+                <small>
+                    ARGUS peut faire des erreurs.
+                </small>
+
             </div>
+
         </main>
+
     </div>
+
 
     <!-- AUTH -->
-    <div id="authScreen" class="overlay">
+
+    <div
+        id="authScreen"
+        class="overlay"
+    >
+
         <div class="card">
-            <div class="auth-wave">〰</div>
+
+            <div class="auth-wave">
+                〰
+            </div>
+
             <h1>ARGUS</h1>
-            <p>Votre assistant intelligent</p>
+
+            <p>
+                Votre assistant intelligent
+            </p>
+
 
             <div id="loginForm">
+
                 <h2>Connexion</h2>
-                <input id="loginUsername" placeholder="Nom d'utilisateur">
-                <input id="loginPassword" type="password" placeholder="Mot de passe">
-                <button id="loginButton" class="primary">Se connecter</button>
-                <p>Pas encore de compte ? <button id="showRegisterButton" class="link">Créer un compte</button></p>
+
+                <input
+                    id="loginUsername"
+                    placeholder="Nom d'utilisateur"
+                >
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Mot de passe"
+                >
+
+                <button
+                    id="loginButton"
+                    class="primary"
+                >
+                    Se connecter
+                </button>
+
+                <p>
+                    Pas encore de compte ?
+                    <button
+                        id="showRegisterButton"
+                        class="link"
+                    >
+                        Créer un compte
+                    </button>
+                </p>
+
             </div>
 
-            <div id="registerForm" class="hidden">
+
+            <div
+                id="registerForm"
+                class="hidden"
+            >
+
                 <h2>Créer un compte</h2>
-                <input id="registerUsername" placeholder="Nom d'utilisateur">
-                <input id="registerPassword" type="password" placeholder="Mot de passe">
+
+                <input
+                    id="registerUsername"
+                    placeholder="Nom d'utilisateur"
+                >
+
+                <input
+                    id="registerPassword"
+                    type="password"
+                    placeholder="Mot de passe"
+                >
+
                 <select id="registerLanguage">
-                    <option value="fr">🇫🇷 Français</option>
-                    <option value="en">🇬🇧 English</option>
-                    <option value="es">🇪🇸 Español</option>
+
+                    <option value="fr">
+                        🇫🇷 Français
+                    </option>
+
+                    <option value="en">
+                        🇬🇧 English
+                    </option>
+
+                    <option value="es">
+                        🇪🇸 Español
+                    </option>
+
                 </select>
-                <button id="registerButton" class="primary">Créer mon compte</button>
-                <p>Déjà un compte ? <button id="showLoginButton" class="link">Se connecter</button></p>
+
+                <button
+                    id="registerButton"
+                    class="primary"
+                >
+                    Créer mon compte
+                </button>
+
+                <p>
+                    Déjà un compte ?
+                    <button
+                        id="showLoginButton"
+                        class="link"
+                    >
+                        Se connecter
+                    </button>
+                </p>
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- SETTINGS (AVEC LE CHAMP MASQUÉ DE LA CLÉ API GROQ) -->
-    <div id="settingsScreen" class="overlay hidden">
+
+    <!-- SETTINGS -->
+
+    <div
+        id="settingsScreen"
+        class="overlay hidden"
+    >
+
         <div class="card">
+
             <div class="settings-title">
-                <h2>⚙️ Paramètres</h2>
-                <button id="closeSettingsButton">×</button>
+
+                <h2>
+                    ⚙️ Paramètres
+                </h2>
+
+                <button
+                    id="closeSettingsButton"
+                >
+                    ×
+                </button>
+
             </div>
 
-            <!-- SECTION SÉCURISÉE CLÉ API -->
-            <label style="color: #ff9800; font-weight: bold; margin-top: 10px; display: block;">Clé API Groq (Confidentielle)</label>
-            <input type="password" id="apiKeyInput" placeholder="collez votre clé ici (gsk_...)" oninput="saveApiKey()" style="width:100%; padding:8px; margin-bottom:10px; border-radius:6px; background:#1e1e1e; color:#fff; border:1px solid #444;">
-            <small id="keyStatus" style="color: #10a37f; display:none; margin-bottom:10px;">✓ Clé enregistrée de manière sécurisée en local</small>
 
-            <label>Thème</label>
+            <label>
+                Thème
+            </label>
+
             <select id="themeSelect">
-                <option value="dark">Sombre</option>
-                <option value="light">Clair</option>
+
+                <option value="dark">
+                    Sombre
+                </option>
+
+                <option value="light">
+                    Clair
+                </option>
+
             </select>
 
-            <label>Langue</label>
+
+            <label>
+                Langue
+            </label>
+
             <select id="languageSelect">
-                <option value="fr">Français</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
+
+                <option value="fr">
+                    Français
+                </option>
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="es">
+                    Español
+                </option>
+
             </select>
 
-            <label>Voix</label>
+
+            <label>
+                Voix
+            </label>
+
             <select id="voiceSelect"></select>
 
-            <button id="testVoiceButton" class="secondary">🔊 Tester la voix</button>
+
+            <button
+                id="testVoiceButton"
+                class="secondary"
+            >
+                🔊 Tester la voix
+            </button>
+
         </div>
+
     </div>
 
-    <!-- SCRIPT DE GESTION DE LA CLÉ LOCALE ET INTÉGRATION GROQ -->
-    <script>
-        // Charger la clé API enregistrée dans le navigateur au démarrage
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedKey = localStorage.getItem('groq_api_key');
-            if (savedKey) {
-                document.getElementById('apiKeyInput').value = savedKey;
-                document.getElementById('keyStatus').style.display = 'block';
-            }
-        });
 
-        // Fonction pour sauvegarder la clé localement sans l'exposer dans le code
-        function saveApiKey() {
-            const key = document.getElementById('apiKeyInput').value.trim();
-            if (key) {
-                localStorage.setItem('groq_api_key', key);
-                document.getElementById('keyStatus').style.display = 'block';
-            } else {
-                localStorage.removeItem('groq_api_key');
-                document.getElementById('keyStatus').style.display = 'none';
-            }
-        }
-    </script>
+    <script src="/script.js"></script>
 
-    <script src="script.js"></script>
 </body>
+
 </html>
