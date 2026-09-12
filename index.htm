@@ -45,7 +45,7 @@
         <button class="btn-new" onclick="resetChat()">+ Nouvelle discussion</button>
         
         <div class="status-box">
-            <span>Accès : <strong>En ligne (Gratuit)</strong></span>
+            <span>Accès : <strong>Gratuit & Direct</strong></span>
         </div>
     </div>
 
@@ -53,7 +53,7 @@
         <div class="messages" id="messages-list">
             <div class="message ai">
                 <div class="avatar">IA</div>
-                <div class="text">Bonjour ! Je suis prête. Posez-moi une question.</div>
+                <div class="text">Bonjour ! Je suis prête. Posez-moi votre question.</div>
             </div>
         </div>
         
@@ -67,7 +67,7 @@
 
     <script>
         let messagesHistory = [
-            { role: "system", content: "Tu es un assistant IA utile, précis et amical." }
+            { role: "system", content: "Tu es un assistant IA utile, précis et amical. Réponds toujours en français." }
         ];
 
         async function sendPrompt() {
@@ -90,12 +90,12 @@
                     },
                     body: JSON.stringify({
                         messages: messagesHistory,
-                        model: 'openai'
+                        model: 'mistral'
                     })
                 });
 
                 if (!response.ok) {
-                    throw new Error("Erreur réponse serveur");
+                    throw new Error("Erreur serveur");
                 }
 
                 const data = await response.text();
@@ -104,7 +104,7 @@
                 messagesHistory.push({ role: "assistant", content: data });
 
             } catch (err) {
-                aiTextDiv.innerText = "Une erreur est survenue lors du traitement. Veuillez réessayer.";
+                aiTextDiv.innerText = "Une erreur est survenue lors de la connexion. Veuillez réessayer.";
             }
         }
 
@@ -130,7 +130,7 @@
         
         function resetChat() { 
             messagesHistory = [
-                { role: "system", content: "Tu es un assistant IA utile, précis et amical." }
+                { role: "system", content: "Tu es un assistant IA utile, précis et amical. Réponds toujours en français." }
             ];
             document.getElementById('messages-list').innerHTML = `
                 <div class="message ai">
