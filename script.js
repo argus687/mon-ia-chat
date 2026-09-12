@@ -115,11 +115,13 @@ function appendMessageToChat(sender, content) {
 async function handleUserMessage(promptText, history) {
     const textLower = promptText.toLowerCase();
 
+    // Heure locale
     if (textLower.includes("heure") || textLower.includes("quelle heure")) {
         const now = new Date();
         return `Il est actuellement **${now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}**.`;
     }
 
+    // Carte OpenStreetMap intégrée (ex: "Où est Nice ?")
     if (textLower.includes("où est") || textLower.includes("carte de") || textLower.includes("situe")) {
         let location = "Paris";
         let lat = "48.8566", lon = "2.3522";
@@ -139,6 +141,7 @@ async function handleUserMessage(promptText, history) {
         <iframe class="map-embed" src="https://www.openstreetmap.org/export/embed.html?bbox=${Number(lon)-0.05},${Number(lat)-0.05},${Number(lon)+0.05},${Number(lat)+0.05}&layer=mapnik&marker=${lat},${lon}"></iframe>`;
     }
 
+    // Météo en direct
     if (textLower.includes("meteo") || textLower.includes("météo")) {
         try {
             let lat = 43.7102, lon = 7.2620, cityName = "Nice";
@@ -161,6 +164,7 @@ async function handleUserMessage(promptText, history) {
         }
     }
 
+    // IA Groq
     const apiKey = localStorage.getItem('groq_api_key');
     if (!apiKey) {
         document.getElementById('settingsScreen').classList.remove('hidden');
