@@ -66,6 +66,10 @@
     </div>
 
     <script>
+        let messagesHistory = [
+            { role: "system", content: "Tu es un assistant IA utile, précis et amical." }
+        ];
+
         async function sendPrompt() {
             const input = document.getElementById('prompt-input');
             const text = input.value.trim();
@@ -74,20 +78,33 @@
             appendMessage('user', text);
             input.value = '';
 
+            messagesHistory.push({ role: "user", content: text });
+
             const aiTextDiv = appendMessage('ai', 'Réflexion...');
 
             try {
-                const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(text)}`);
+                const response = await fetch('https://text.pollinations.ai/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        messages: messagesHistory,
+                        model: 'openai'
+                    })
+                });
 
                 if (!response.ok) {
-                    throw new Error("Erreur serveur");
+                    throw new Error("Erreur réponse serveur");
                 }
 
                 const data = await response.text();
                 aiTextDiv.innerText = data || "Désolé, aucune réponse reçue.";
+                
+                messagesHistory.push({ role: "assistant", content: data });
 
             } catch (err) {
-                aiTextDiv.innerText = "Erreur de connexion. Si vous utilisez un adblocker, désactivez-le pour ce site et réessayez.";
+                aiTextDiv.innerText = "Une erreur est survenue lors du traitement. Veuillez réessayer.";
             }
         }
 
@@ -112,6 +129,9 @@
         }
         
         function resetChat() { 
+            messagesHistory = [
+                { role: "system", content: "Tu es un assistant IA utile, précis et amical." }
+            ];
             document.getElementById('messages-list').innerHTML = `
                 <div class="message ai">
                     <div class="avatar">IA</div>
