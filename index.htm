@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARGUS AI</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Style additionnel pour intégrer proprement les cartes et widgets météo dans le chat */
-        .map-embed { width: 100%; height: 250px; border-radius: 8px; border: 1px solid #444; margin-top: 10px; }
-        .weather-card { background: #2d2d2d; padding: 12px; border-radius: 8px; margin-top: 8px; border-left: 4px solid #10a37f; }
-    </style>
 </head>
 <body>
 
     <div id="app">
+        <!-- Barre latérale -->
         <aside id="sidebar">
             <div class="logo">
                 <span class="wave">〰</span>
@@ -31,6 +27,7 @@
             </div>
         </aside>
 
+        <!-- Zone principale de chat -->
         <main>
             <header>
                 <button id="mobileMenuButton">☰</button>
@@ -57,7 +54,7 @@
         </main>
     </div>
 
-    <!-- AUTH -->
+    <!-- Écran d'Authentification -->
     <div id="authScreen" class="overlay">
         <div class="card">
             <div class="auth-wave">〰</div>
@@ -87,7 +84,7 @@
         </div>
     </div>
 
-    <!-- SETTINGS (AVEC LE CHAMP MASQUÉ DE LA CLÉ API GROQ) -->
+    <!-- Écran des Paramètres -->
     <div id="settingsScreen" class="overlay hidden">
         <div class="card">
             <div class="settings-title">
@@ -96,7 +93,7 @@
             </div>
 
             <label style="color: #ff9800; font-weight: bold; margin-top: 10px; display: block;">Clé API Groq (Confidentielle)</label>
-            <input type="password" id="apiKeyInput" placeholder="gsk_..." oninput="saveApiKey()" style="width:100%; padding:8px; margin-bottom:10px; border-radius:6px; background:#1e1e1e; color:#fff; border:1px solid #444;">
+            <input type="password" id="apiKeyInput" placeholder="gsk_..." oninput="saveApiKey()">
             <small id="keyStatus" style="color: #10a37f; display:none; margin-bottom:10px;">✓ Clé enregistrée de manière sécurisée en local</small>
 
             <label>Thème</label>
@@ -120,14 +117,6 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedKey = localStorage.getItem('groq_api_key');
-            if (savedKey) {
-                document.getElementById('apiKeyInput').value = savedKey;
-                document.getElementById('keyStatus').style.display = 'block';
-            }
-        });
-
         function saveApiKey() {
             const key = document.getElementById('apiKeyInput').value.trim();
             if (key) {
@@ -139,7 +128,6 @@
             }
         }
     </script>
-
     <script src="script.js"></script>
 </body>
 </html>
