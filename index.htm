@@ -9,7 +9,7 @@
 <body>
 
     <div id="app">
-        <!-- Barre latérale -->
+        <!-- Sidebar style ChatGPT -->
         <aside id="sidebar">
             <div class="logo">
                 <span class="wave">〰</span>
@@ -27,7 +27,7 @@
             </div>
         </aside>
 
-        <!-- Zone principale de chat -->
+        <!-- Zone principale -->
         <main>
             <header>
                 <button id="mobileMenuButton">☰</button>
@@ -54,7 +54,7 @@
         </main>
     </div>
 
-    <!-- Écran d'Authentification -->
+    <!-- Écran Connexion / Inscription -->
     <div id="authScreen" class="overlay">
         <div class="card">
             <div class="auth-wave">〰</div>
@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <!-- Écran des Paramètres -->
+    <!-- Écran Paramètres -->
     <div id="settingsScreen" class="overlay hidden">
         <div class="card">
             <div class="settings-title">
@@ -108,11 +108,6 @@
                 <option value="en">English</option>
                 <option value="es">Español</option>
             </select>
-
-            <label>Voix</label>
-            <select id="voiceSelect"></select>
-
-            <button id="testVoiceButton" class="secondary">🔊 Tester la voix</button>
         </div>
     </div>
 
