@@ -3,80 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon IA Studio</title>
-    <!-- Firebase pour l'authentification -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <title>Mon IA Chat</title>
     <style>
         :root {
             --bg-main: #212121;
             --bg-sidebar: #171717;
-            --bg-chat: #212121;
             --bg-input: #2f2f2f;
             --text-primary: #ececf1;
-            --text-secondary: #b4b4b4;
             --accent-green: #10a37f;
             --border-color: #424242;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { display: flex; height: 100vh; background-color: var(--bg-main); color: var(--text-primary); }
 
-        /* Sidebar */
-        .sidebar { width: 260px; background-color: var(--bg-sidebar); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid #2f2f2f; }
-        .sidebar-top { display: flex; flex-direction: column; gap: 8px; }
-        .btn-new { background: transparent; border: 1px solid var(--border-color); color: #fff; padding: 10px; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.2s; font-size: 14px; }
-        .btn-new:hover { background-color: #212121; }
+        .sidebar { width: 260px; background-color: var(--bg-sidebar); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border-color); }
+        .btn-new { background: transparent; border: 1px solid var(--border-color); color: #fff; padding: 10px; border-radius: 8px; cursor: pointer; text-align: left; }
+        
+        .api-box { background: #2f2f2f; padding: 10px; border-radius: 8px; font-size: 12px; }
+        .api-box input { width: 100%; padding: 6px; margin-top: 6px; background: #171717; border: 1px solid var(--border-color); color: white; border-radius: 4px; }
 
-        /* Auth & Sub Section */
-        .user-card { background: #212121; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
-        .user-info { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
-        .btn-action { background-color: var(--accent-green); color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; font-size: 13px; margin-top: 4px; }
-        .btn-auth { background-color: #3f3f3f; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer; width: 100%; font-size: 13px; margin-top: 4px; }
-
-        /* Main Chat */
         .chat-container { flex: 1; display: flex; flex-direction: column; height: 100vh; }
-        .messages { flex: 1; overflow-y: auto; padding: 20px 0; }
-        .message-row { display: flex; justify-content: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .message-content { width: 100%; max-width: 768px; display: flex; gap: 16px; padding: 0 20px; }
-        .avatar { width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 14px; }
+        .messages { flex: 1; overflow-y: auto; padding: 20px; }
+        .message { display: flex; gap: 16px; max-width: 768px; margin: 0 auto 20px auto; line-height: 1.6; }
+        .avatar { width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
         .user .avatar { background: #5436da; }
         .ai .avatar { background: var(--accent-green); }
-        .text { line-height: 1.6; font-size: 15px; }
 
-        /* Input Area */
-        .input-area { padding: 20px; display: flex; justify-content: center; background: var(--bg-main); }
+        .input-area { padding: 20px; display: flex; justify-content: center; }
         .input-wrapper { width: 100%; max-width: 768px; position: relative; }
-        textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 48px 14px 16px; color: #fff; resize: none; height: 52px; outline: none; font-size: 15px; }
-        .send-btn { position: absolute; right: 12px; top: 10px; background: var(--accent-green); border: none; color: white; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 100; }
-        .modal-box { background: var(--bg-sidebar); padding: 24px; border-radius: 12px; width: 100%; max-width: 400px; border: 1px solid var(--border-color); text-align: center; }
-        .close-btn { background: transparent; border: none; color: var(--text-secondary); cursor: pointer; margin-top: 12px; font-size: 13px; }
+        textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 48px 14px 16px; color: #fff; resize: none; height: 52px; outline: none; }
+        .send-btn { position: absolute; right: 12px; top: 10px; background: var(--accent-green); border: none; color: white; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <div class="sidebar-top">
-            <button class="btn-new" onclick="resetChat()">+ Nouvelle discussion</button>
-        </div>
+        <button class="btn-new" onclick="resetChat()">+ Nouvelle discussion</button>
         
-        <div class="user-card">
-            <div class="user-info" id="user-display">Non connecté</div>
-            <button class="btn-auth" id="auth-btn" onclick="openAuthModal()">Se connecter</button>
-            <button class="btn-action" onclick="openSubModal()" style="display:none;" id="sub-btn">Passer Pro</button>
+        <div class="api-box">
+            <label>Clé API Groq (Gratuite) :</label>
+            <input type="password" id="api-key" placeholder="gsk_..." onchange="saveKey()">
         </div>
     </div>
 
     <div class="chat-container">
         <div class="messages" id="messages-list">
-            <div class="message-row">
-                <div class="message-content ai">
-                    <div class="avatar">IA</div>
-                    <div class="text">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
-                </div>
+            <div class="message ai">
+                <div class="avatar">IA</div>
+                <div class="text">Bonjour ! Entrez votre clé API gratuite Groq dans le menu de gauche pour commencer à discuter.</div>
             </div>
         </div>
         
@@ -88,72 +63,22 @@
         </div>
     </div>
 
-    <!-- Modal Connexion -->
-    <div class="modal" id="auth-modal">
-        <div class="modal-box">
-            <h3>Connexion / Inscription</h3>
-            <p style="margin: 15px 0; font-size: 14px; color: var(--text-secondary);">Connectez-vous pour enregistrer votre historique et votre abonnement.</p>
-            <button class="btn-auth" onclick="loginGoogle()" style="background: #4285F4; margin-bottom: 8px;">Continuer avec Google</button>
-            <button class="close-btn" onclick="closeModal('auth-modal')">Annuler</button>
-        </div>
-    </div>
-
-    <!-- Modal Abonnement -->
-    <div class="modal" id="sub-modal">
-        <div class="modal-box">
-            <h3>Abonnement Pro</h3>
-            <p style="margin: 15px 0; font-size: 14px; color: var(--text-secondary);">Accès illimité aux réponses rapides pour 9,99€ / mois.</p>
-            <button class="btn-action" onclick="redirectToStripe()">Souscrire via Stripe</button>
-            <button class="close-btn" onclick="closeModal('sub-modal')">Annuler</button>
-        </div>
-    </div>
-
     <script>
-        // Configuration Firebase (À remplacer avec vos identifiants)
-        const firebaseConfig = {
-            apiKey: "VOTRE_API_KEY",
-            authDomain: "votre-app.firebaseapp.com",
-            projectId: "votre-app",
-        };
-        firebase.initializeApp(firebaseConfig);
+        // Charger la clé API sauvegardée
+        document.getElementById('api-key').value = localStorage.getItem('groq_key') || '';
 
-        let currentUser = null;
-
-        // Gestion Authentification Google
-        function loginGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider).then(result => {
-                currentUser = result.user;
-                updateUserUI();
-                closeModal('auth-modal');
-            }).catch(error => alert(error.message));
+        function saveKey() {
+            const key = document.getElementById('api-key').value.trim();
+            localStorage.setItem('groq_key', key);
         }
 
-        firebase.auth().onAuthStateChanged(user => {
-            currentUser = user;
-            updateUserUI();
-        });
-
-        function updateUserUI() {
-            const display = document.getElementById('user-display');
-            const authBtn = document.getElementById('auth-btn');
-            const subBtn = document.getElementById('sub-btn');
-
-            if (currentUser) {
-                display.innerText = currentUser.displayName || currentUser.email;
-                authBtn.innerText = "Déconnexion";
-                authBtn.onclick = () => firebase.auth().signOut();
-                subBtn.style.display = "block";
-            } else {
-                display.innerText = "Non connecté";
-                authBtn.innerText = "Se connecter";
-                authBtn.onclick = () => openAuthModal();
-                subBtn.style.display = "none";
-            }
-        }
-
-        // Envoi du message via une API distante (évite le bug WebGPU local)
         async function sendPrompt() {
+            const apiKey = localStorage.getItem('groq_key');
+            if (!apiKey) {
+                alert("Veuillez coller votre clé API Groq gratuite dans la barre latérale.");
+                return;
+            }
+
             const input = document.getElementById('prompt-input');
             const text = input.value.trim();
             if (!text) return;
@@ -161,45 +86,47 @@
             appendMessage('user', text);
             input.value = '';
 
-            const aiTextDiv = appendMessage('ai', 'Réflexion en cours...');
+            const aiTextDiv = appendMessage('ai', 'Réflexion...');
 
             try {
-                // Remplacer l'URL par votre endpoint backend (ex: OpenAI, Groq, ou serveur Python)
-                const response = await fetch('HTTPS://VOTRE-BACKEND-API.com/chat', {
+                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text, userId: currentUser ? currentUser.uid : null })
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.3-70b-versatile',
+                        messages: [{ role: 'user', content: text }]
+                    })
                 });
 
                 const data = await response.json();
-                aiTextDiv.innerText = data.reply;
+                if (data.error) {
+                    aiTextDiv.innerText = "Erreur : " + data.error.message;
+                } else {
+                    aiTextDiv.innerText = data.choices[0].message.content;
+                }
             } catch (err) {
-                aiTextDiv.innerText = "Erreur de connexion avec le serveur IA. Veuillez vérifier votre clé API/Backend.";
+                aiTextDiv.innerText = "Erreur de connexion à l'API.";
             }
         }
 
         function appendMessage(role, text) {
             const container = document.getElementById('messages-list');
-            const row = document.createElement('div');
-            row.className = 'message-row';
-            
-            row.innerHTML = `
-                <div class="message-content ${role}">
-                    <div class="avatar">${role === 'user' ? 'Vous' : 'IA'}</div>
-                    <div class="text">${text}</div>
-                </div>
+            const div = document.createElement('div');
+            div.className = `message ${role}`;
+            div.innerHTML = `
+                <div class="avatar">${role === 'user' ? 'Vous' : 'IA'}</div>
+                <div class="text">${text}</div>
             `;
-            container.appendChild(row);
+            container.appendChild(div);
             container.scrollTop = container.scrollHeight;
-            return row.querySelector('.text');
+            return div.querySelector('.text');
         }
 
         function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendPrompt(); } }
         function resetChat() { document.getElementById('messages-list').innerHTML = ''; }
-        function openAuthModal() { document.getElementById('auth-modal').style.display = 'flex'; }
-        function openSubModal() { document.getElementById('sub-modal').style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        function redirectToStripe() { alert("Redirection vers la page de paiement Stripe..."); }
     </script>
 </body>
 </html>
